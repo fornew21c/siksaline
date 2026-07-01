@@ -21,8 +21,8 @@ export function BannerSlogans({ eyebrow = true }: { eyebrow?: boolean }) {
           </p>
         )}
 
-        {/* 대표 현수막 (노랑 바탕) */}
-        <div className="rounded-xl px-5 py-6 sm:px-9 sm:py-8" style={{ background: YELLOW }}>
+        {/* 대표 현수막 (노랑 바탕) — 면적 절제: 풀폭 대신 살짝 좁게, 패딩 축소 */}
+        <div className="max-w-4xl rounded-xl px-5 py-5 sm:px-8 sm:py-6" style={{ background: YELLOW }}>
           <p className="text-2xl font-black leading-[1.15] tracking-tight text-black sm:text-4xl">
             <span style={{ color: RED }}>{featured.lead}</span> {featured.body}{" "}
             <span className="underline decoration-4 underline-offset-4" style={{ color: RED }}>
@@ -50,8 +50,8 @@ export function BannerSlogans({ eyebrow = true }: { eyebrow?: boolean }) {
                   {b.lead}
                 </span>
                 {b.body}{" "}
-                <span style={{ color: YELLOW }}>{b.em}</span>
-                <span style={{ color: RED }}>{b.tail}</span>
+                <span style={{ color: RED }}>{b.em}</span>
+                <span className="text-white">{b.tail}</span>
               </p>
             </div>
           ))}
