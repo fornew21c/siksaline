@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+/* =========================================================
+   고양은평선 식사연장 플랫폼 디자인 시스템
+   - 성격: 공공/데이터 저널리즘, 신뢰감, 정치적 중립
+   - 컬러: 교통(노선) 블루 + 데이터 틴트 틸 + 절제된 시그널
+   ========================================================= */
+
+:root {
+  --background: #f7f9fc;
+  --surface: #ffffff;
+  --surface-2: #eef2f8;
+  --ink: #0f1b2d;
+  --ink-soft: #3d4a5c;
+  --ink-muted: #6b7787;
+  --border: #dce3ec;
+  --border-strong: #c3cede;
+
+  /* 브랜드 — 노선 블루 */
+  --brand: #12508f;
+  --brand-strong: #0d3d70;
+  --brand-soft: #e7eff8;
+
+  /* 데이터 틸 (2차 강조) */
+  --teal: #0e8f88;
+  --teal-soft: #e0f4f2;
+
+  /* 시그널 (혼잡/경고 — 절제 사용) */
+  --signal: #d1560b;
+  --signal-soft: #fbeadb;
+
+  /* 긍정 (개선/절감) */
+  --good: #1f8a4c;
+  --good-soft: #e4f5eb;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
+
+  --radius-card: 16px;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "tnum" 1; /* 표 숫자 정렬 */
+}
+
+/* 숫자 강조용 — 데이터 카드 */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* 얇은 스크롤바 (표/차트 가로 스크롤) */
+.scroll-x {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* 등장 애니메이션 */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise {
+    animation: none;
+  }
+}
