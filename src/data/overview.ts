@@ -15,7 +15,6 @@ export const CAMPAIGN = {
   who: "식사·풍동 8만 주민 일동",
   cityPop: "106만",
   demand: "국토부 대도시권광역교통위원회는 고양은평선 식사·풍동 연장을 조속히 확정하라",
-  contact: "hello@siksaline.kr",
 };
 
 /** 현수막 슬로건 (오프라인과 동기화) — 평문 */

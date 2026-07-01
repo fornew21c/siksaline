@@ -59,9 +59,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} 고양은평선 식사연장 데이터 플랫폼. 시민 자율 운영 · 비영리.</p>
-          <p className="tabular">
-            siksaline.kr · 문의 hello@siksaline.kr
-          </p>
+          <p>고양은평선연장 추진모임 · 식사·풍동 8만 주민 일동</p>
         </div>
       </div>
     </footer>

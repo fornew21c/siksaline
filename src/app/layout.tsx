@@ -3,7 +3,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
-const SITE_URL = "https://siksaline.kr";
+// 도메인(siksaline.kr) 구매·연결 후 아래를 "https://siksaline.kr"로 변경
+const SITE_URL = "https://siksaline.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
