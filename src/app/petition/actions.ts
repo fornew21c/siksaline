@@ -3,71 +3,50 @@
 import { anonClient, serviceClient, isSupabaseConfigured } from "@/lib/supabase";
 import { SIGN_REGIONS } from "./regions";
 
-const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-
 type Result = { ok: boolean; error?: string; count?: number };
 
-/** 1단계: 이메일로 6자리 인증코드 발송 (Supabase Auth OTP — 무료, 도메인 불필요) */
-export async function sendSignatureCode(email: string): Promise<Result> {
-  if (!isSupabaseConfigured) {
-    return { ok: false, error: "서명 시스템 준비 중입니다. 곧 오픈합니다." };
-  }
-  const e = email.trim().toLowerCase();
-  if (!EMAIL_RE.test(e)) return { ok: false, error: "이메일 형식을 확인해주세요." };
-
-  try {
-    const supa = anonClient();
-    const { error } = await supa.auth.signInWithOtp({
-      email: e,
-      options: { shouldCreateUser: true },
-    });
-    if (error) {
-      return { ok: false, error: "인증 메일 발송에 실패했습니다. 잠시 후 다시 시도해주세요." };
-    }
-    return { ok: true };
-  } catch {
-    return { ok: false, error: "일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요." };
-  }
-}
-
-/** 2단계: 코드 검증 후 서명 저장 (이메일당 1회, 중복은 갱신) */
-export async function confirmSignature(input: {
-  email: string;
-  code: string;
+/**
+ * 매직링크 인증 완료 후 서명 저장.
+ * 브라우저에서 받은 access_token 을 서버가 Supabase에 재검증(getUser)해서
+ * 실제 인증된 이메일을 확인한 뒤 저장한다. (클라이언트가 이메일을 위조 못 함)
+ * 이름·지역은 자기신고 값(localStorage) 우선, 없으면 user_metadata 폴백.
+ */
+export async function recordSignature(input: {
+  accessToken: string;
   name: string;
   region: string;
 }): Promise<Result> {
-  if (!isSupabaseConfigured) {
-    return { ok: false, error: "서명 시스템 준비 중입니다." };
-  }
-  const email = input.email.trim().toLowerCase();
-  const name = input.name.trim();
-  const region = input.region;
-  const code = input.code.trim();
-
-  if (name.length < 2) return { ok: false, error: "이름을 확인해주세요." };
-  if (!SIGN_REGIONS.includes(region)) return { ok: false, error: "거주지역을 선택해주세요." };
-  if (!/^\d{6}$/.test(code)) return { ok: false, error: "인증코드 6자리를 입력해주세요." };
+  if (!isSupabaseConfigured) return { ok: false, error: "서명 시스템 준비 중입니다." };
 
   try {
-    // 이메일 소유 증명 (OTP 검증)
     const supa = anonClient();
-    const { error: vErr } = await supa.auth.verifyOtp({ email, token: code, type: "email" });
-    if (vErr) return { ok: false, error: "코드가 올바르지 않거나 만료됐습니다. 다시 시도해주세요." };
+    const { data, error } = await supa.auth.getUser(input.accessToken);
+    if (error || !data.user?.email) {
+      return { ok: false, error: "이메일 인증을 확인할 수 없습니다. 링크를 다시 눌러주세요." };
+    }
+    const email = data.user.email.toLowerCase();
+    const meta = (data.user.user_metadata ?? {}) as Record<string, string>;
 
-    // 서명 저장 (service_role — RLS 우회). 이메일당 1건.
+    const name = (input.name?.trim() || meta.sig_name || "").trim();
+    const region =
+      SIGN_REGIONS.includes(input.region)
+        ? input.region
+        : SIGN_REGIONS.includes(meta.sig_region)
+        ? meta.sig_region
+        : "기타 지역";
+
+    if (name.length < 2) {
+      return { ok: false, error: "이름 정보가 없어 저장하지 못했습니다. 서명 화면에서 다시 시도해주세요." };
+    }
+
     const svc = serviceClient();
     const { error: iErr } = await svc.from("signatures").upsert(
       { email, name, region, verified_at: new Date().toISOString() },
       { onConflict: "email" }
     );
-    // 임시 세션 정리 (로그인 상태로 남기지 않음)
-    await supa.auth.signOut().catch(() => {});
-
     if (iErr) return { ok: false, error: "서명 저장 중 오류가 발생했습니다." };
 
-    const count = await getSignatureCount();
-    return { ok: true, count };
+    return { ok: true, count: await getSignatureCount() };
   } catch {
     return { ok: false, error: "일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요." };
   }
