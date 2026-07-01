@@ -48,19 +48,62 @@ export const NEWS = [
   { date: "2025-07", source: "딜라이브뉴스", title: "'고양은평선 식사동 연장' 서명운동 시작", url: "https://news.dlive.kr/news/articleView.html?idxno=18832" },
 ];
 
-/** 자료실 */
+/**
+ * 자료실
+ * kind: "file" = 우리가 제공하는 다운로드, "link" = 외부 원본 출처, "pending" = 확보 중
+ */
 export const RESOURCES = [
+  {
+    title: "식사·고양 핵심 지표 데이터셋 (2025)",
+    format: "CSV",
+    size: "다운로드",
+    source: "자체 정리 (지표별 출처 포함)",
+    ready: true,
+    kind: "file" as const,
+    url: "/data/siksaline-key-stats-2025.csv",
+  },
   {
     title: "고양은평선 일산(식사) 연장 촉구 결의안 (원문)",
     format: "PDF",
     size: "외부 링크",
     source: "고양시의회",
     ready: true,
+    kind: "link" as const,
     url: "https://www.goyangcouncil.go.kr/viewer/pdf.do?group=appendix&uid=29112",
   },
-  { title: "식사동·고양시 인구 현황(2025)", format: "CSV", size: "—", source: "행안부 주민등록", ready: false },
-  { title: "고양은평선 본선·연장 개념 정리", format: "PDF", size: "—", source: "보도 종합", ready: false },
-  { title: "버스 혼잡도·배차 (확보 예정)", format: "CSV", size: "—", source: "국가대중교통DB(TAGO)", ready: false },
-  { title: "서울 거점 통행시간 (확보 예정)", format: "CSV", size: "—", source: "KTDB", ready: false },
-  { title: "교통 소외지수 산정 방법론 (작성 예정)", format: "PDF", size: "—", source: "자체 산정", ready: false },
+  {
+    title: "식사동·고양시 인구 통계 (원본)",
+    format: "링크",
+    size: "KOSIS",
+    source: "통계청 KOSIS",
+    ready: true,
+    kind: "link" as const,
+    url: "https://kosis.kr",
+  },
+  {
+    title: "버스·대중교통 원자료 (원본)",
+    format: "링크",
+    size: "공공데이터포털",
+    source: "국가대중교통DB(TAGO)",
+    ready: true,
+    kind: "link" as const,
+    url: "https://www.data.go.kr",
+  },
+  {
+    title: "경기 교통·지역 데이터 (원본)",
+    format: "링크",
+    size: "경기데이터드림",
+    source: "경기도",
+    ready: true,
+    kind: "link" as const,
+    url: "https://data.gg.go.kr",
+  },
+  {
+    title: "교통 소외지수 산정 방법론 (작성 예정)",
+    format: "PDF",
+    size: "—",
+    source: "자체 산정",
+    ready: false,
+    kind: "pending" as const,
+  },
 ];

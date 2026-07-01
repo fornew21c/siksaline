@@ -18,16 +18,23 @@ export default function ResourcesPage() {
       />
 
       <Section>
-        <SectionTitle desc="CSV·PDF 형식으로 제공">데이터 다운로드</SectionTitle>
+        <SectionTitle desc="검증된 지표는 바로 받고, 원본은 공개 출처로 연결됩니다">
+          데이터 · 원본 출처
+        </SectionTitle>
         <div className="grid gap-3">
           {RESOURCES.map((r) => {
             const url = "url" in r ? (r.url as string) : undefined;
+            const isFile = r.kind === "file";
             return (
               <Card key={r.title} className="flex items-center justify-between gap-4">
                 <div className="flex min-w-0 items-center gap-4">
                   <div
-                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xs font-extrabold ${
-                      r.format === "CSV" ? "bg-teal-soft text-teal" : "bg-signal-soft text-signal"
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-[0.7rem] font-extrabold ${
+                      r.format === "CSV"
+                        ? "bg-teal-soft text-teal"
+                        : r.format === "링크"
+                        ? "bg-brand-soft text-brand"
+                        : "bg-signal-soft text-signal"
                     }`}
                   >
                     {r.format}
@@ -42,14 +49,24 @@ export default function ResourcesPage() {
                 {r.ready && url ? (
                   <a
                     href={url}
-                    target="_blank"
-                    rel="noreferrer"
+                    {...(isFile ? { download: "" } : { target: "_blank", rel: "noreferrer" })}
                     className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border-strong px-3.5 py-2 text-sm font-bold text-ink transition-colors hover:bg-surface-2"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
-                    </svg>
-                    원문 보기
+                    {isFile ? (
+                      <>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 3v12M7 11l5 5 5-5M4 21h16" />
+                        </svg>
+                        받기
+                      </>
+                    ) : (
+                      <>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                        </svg>
+                        바로가기
+                      </>
+                    )}
                   </a>
                 ) : (
                   <span className="shrink-0 rounded-lg bg-surface-2 px-3.5 py-2 text-sm font-bold text-ink-muted">
@@ -75,7 +92,7 @@ export default function ResourcesPage() {
           </Callout>
         </div>
         <p className="mt-4 text-xs text-ink-muted">
-          ※ 시의회 결의안은 고양시의회 원문으로 연결됩니다. 나머지 데이터는 확보 후 순차 공개합니다. {DATA_NOTE}
+          ※ 핵심 지표 CSV는 지표별 출처를 포함합니다. 원본 데이터는 각 공개 출처로 연결되며, 산정 방법론 문서는 작성 후 공개합니다. {DATA_NOTE}
         </p>
       </Section>
     </>
