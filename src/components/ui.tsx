@@ -153,7 +153,7 @@ export function StatCard({
     <Card className="flex flex-col justify-between">
       <p className="text-sm font-semibold text-ink-soft">{label}</p>
       <p className="mt-3 flex items-baseline gap-1">
-        <span className={`tabular text-3xl font-extrabold sm:text-4xl ${accent}`}>
+        <span className={`tabular whitespace-nowrap text-3xl font-extrabold sm:text-4xl ${accent}`}>
           {value}
         </span>
         {unit && <span className="text-sm font-bold text-ink-muted">{unit}</span>}

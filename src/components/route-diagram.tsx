@@ -66,6 +66,7 @@ export function RouteDiagram() {
           </li>
         ))}
       </ul>
+      <p className="mt-2 text-xs text-ink-muted sm:hidden">← 좌우로 밀어 전체 노선을 볼 수 있어요 →</p>
     </div>
   );
 }
