@@ -43,9 +43,9 @@ export const LINE = {
 /** 노선 핵심 팩트 (출처 있는 실제 정보) */
 export const LINE_FACTS = [
   { label: "본선 연장", value: "약 15", unit: "km", tone: "brand" as const, sub: "새절~고양시청" },
-  { label: "개통 목표", value: "2031", unit: "년", tone: "teal" as const, sub: "기본·실시설계 진행" },
-  { label: "차량 형식", value: "K-AGT", unit: "", tone: "brand" as const, sub: "고무차륜 경전철" },
-  { label: "차량기지~식사", value: "약 2", unit: "km", tone: "good" as const, sub: "연장 효율성 근거" },
+  { label: "개통 목표", value: "2031", unit: "년", tone: "teal" as const, sub: "K-AGT 경전철" },
+  { label: "식사 연장 구간", value: "2.04", unit: "km", tone: "good" as const, sub: "고양시청→식사(가칭)" },
+  { label: "연장 사업비", value: "2,361", unit: "억원", tone: "brand" as const, sub: "시의회 결의안 기준" },
 ];
 
 /** 연장 근거 — 검증된 실데이터 */
