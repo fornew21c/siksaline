@@ -66,7 +66,7 @@ function MobileTabs({ pathname }: { pathname: string }) {
     const box = scroller.current;
     if (!el || !box) return;
     const left = el.offsetLeft - box.clientWidth / 2 + el.clientWidth / 2;
-    box.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+    box.scrollTo({ left: Math.max(0, left), behavior: "auto" });
   }, [pathname]);
 
   return (
