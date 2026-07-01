@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Section, Card, PageHeader, SectionTitle, StatCard, Badge, PendingData, Callout } from "@/components/ui";
+import { Section, Card, PageHeader, StatCard, Badge, PendingData } from "@/components/ui";
 import { PetitionForm } from "@/components/petition-form";
+import { BannerSlogans } from "@/components/banner-slogans";
 import { PETITION } from "@/data/civic";
-import { CAMPAIGN, SLOGANS } from "@/data/overview";
+import { CAMPAIGN } from "@/data/overview";
 
 export const metadata: Metadata = {
   title: "주민 서명",
@@ -56,19 +57,8 @@ export default function PetitionPage() {
         </div>
       </Section>
 
-      {/* 요구 · 슬로건 (현수막 동기화) */}
-      <Section className="pt-0">
-        <SectionTitle desc="거리의 현수막과 같은 메시지입니다">우리의 요구</SectionTitle>
-        <Callout title={CAMPAIGN.demand} tone="brand">
-          <div className="mt-3 flex flex-wrap gap-2">
-            {SLOGANS.map((s) => (
-              <span key={s} className="rounded-full bg-surface-2 px-3 py-1.5 text-xs font-semibold text-ink-soft">
-                {s}
-              </span>
-            ))}
-          </div>
-        </Callout>
-      </Section>
+      {/* 요구 · 슬로건 (현수막 스타일) */}
+      <BannerSlogans />
 
       <Section className="pt-0">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">

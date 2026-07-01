@@ -10,9 +10,10 @@ import {
   SectionTitle,
   SourceTag,
 } from "@/components/ui";
-import { TODAY, VISION, PHILOSOPHY, FEATURES, DATA_NOTE, CAMPAIGN, SLOGANS } from "@/data/overview";
+import { TODAY, VISION, PHILOSOPHY, FEATURES, DATA_NOTE } from "@/data/overview";
 import { POP_FACTS, POP_SOURCE, COMMUTE_CLAIM } from "@/data/transit";
 import { PETITION } from "@/data/civic";
+import { BannerSlogans } from "@/components/banner-slogans";
 
 export default function HomePage() {
   const pct = Math.round((PETITION.current / PETITION.goal) * 100);
@@ -60,28 +61,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ---------------- 요구 · 슬로건 (현수막 동기화) ---------------- */}
-      <section className="border-b border-border bg-ink text-white">
-        <Container className="py-10">
-          <p className="text-sm font-bold text-[color:var(--good)]">우리의 요구</p>
-          <p className="mt-2 text-xl font-extrabold leading-snug sm:text-2xl">
-            {CAMPAIGN.demand}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2.5">
-            {SLOGANS.map((s) => (
-              <span
-                key={s}
-                className="rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-xs font-semibold text-white/90"
-              >
-                {s}
-              </span>
-            ))}
-          </div>
-          <p className="mt-6 text-sm text-white/60">
-            {CAMPAIGN.org} · {CAMPAIGN.who} · {CAMPAIGN.cityPop} 고양시민의 염원
-          </p>
-        </Container>
-      </section>
+      {/* ---------------- 요구 · 슬로건 (현수막 스타일) ---------------- */}
+      <BannerSlogans />
 
       {/* ---------------- 오늘의 데이터 ---------------- */}
       <Section>
