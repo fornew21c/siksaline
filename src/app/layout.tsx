@@ -29,9 +29,24 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     url: SITE_URL,
     siteName: "고양은평선 식사연장",
-    title: "고양은평선 식사동 연장 데이터 플랫폼",
+    title: "고양은평선 식사·풍동 연장 데이터 플랫폼",
     description:
-      "감정이 아닌 데이터로. 고양 북동부 교통복지·균형발전을 위한 공공데이터 기반 시민 플랫폼.",
+      "감정이 아닌 데이터로. 식사·풍동 8만 주민의 교통복지와 균형발전을 공공데이터로 증명하는 시민 플랫폼.",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "고양은평선 식사·풍동 연장 — 시민 데이터 플랫폼",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "고양은평선 식사·풍동 연장 데이터 플랫폼",
+    description:
+      "감정이 아닌 데이터로. 식사·풍동 8만 주민의 교통복지를 공공데이터로 증명하는 시민 플랫폼.",
+    images: ["/og.png"],
   },
 };
 
