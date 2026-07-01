@@ -50,6 +50,14 @@ export const NEWS = [
 
 /** 자료실 */
 export const RESOURCES = [
+  {
+    title: "고양은평선 일산(식사) 연장 촉구 결의안 (원문)",
+    format: "PDF",
+    size: "외부 링크",
+    source: "고양시의회",
+    ready: true,
+    url: "https://www.goyangcouncil.go.kr/viewer/pdf.do?group=appendix&uid=29112",
+  },
   { title: "식사동·고양시 인구 현황(2025)", format: "CSV", size: "—", source: "행안부 주민등록", ready: false },
   { title: "고양은평선 본선·연장 개념 정리", format: "PDF", size: "—", source: "보도 종합", ready: false },
   { title: "버스 혼잡도·배차 (확보 예정)", format: "CSV", size: "—", source: "국가대중교통DB(TAGO)", ready: false },

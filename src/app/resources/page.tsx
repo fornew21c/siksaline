@@ -20,38 +20,45 @@ export default function ResourcesPage() {
       <Section>
         <SectionTitle desc="CSV·PDF 형식으로 제공">데이터 다운로드</SectionTitle>
         <div className="grid gap-3">
-          {RESOURCES.map((r) => (
-            <Card key={r.title} className="flex items-center justify-between gap-4">
-              <div className="flex min-w-0 items-center gap-4">
-                <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xs font-extrabold ${
-                    r.format === "CSV" ? "bg-teal-soft text-teal" : "bg-signal-soft text-signal"
-                  }`}
-                >
-                  {r.format}
+          {RESOURCES.map((r) => {
+            const url = "url" in r ? (r.url as string) : undefined;
+            return (
+              <Card key={r.title} className="flex items-center justify-between gap-4">
+                <div className="flex min-w-0 items-center gap-4">
+                  <div
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xs font-extrabold ${
+                      r.format === "CSV" ? "bg-teal-soft text-teal" : "bg-signal-soft text-signal"
+                    }`}
+                  >
+                    {r.format}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="truncate font-bold text-ink">{r.title}</h3>
+                    <p className="mt-0.5 text-xs text-ink-muted">
+                      {r.ready ? "출처" : "확보 예정 출처"}: {r.source}
+                    </p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <h3 className="truncate font-bold text-ink">{r.title}</h3>
-                  <p className="mt-0.5 text-xs text-ink-muted">확보 예정 출처: {r.source}</p>
-                </div>
-              </div>
-              {r.ready ? (
-                <button
-                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border-strong px-3.5 py-2 text-sm font-bold text-ink transition-colors hover:bg-surface-2"
-                  aria-label={`${r.title} 다운로드`}
-                >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 3v12M7 11l5 5 5-5M4 21h16" />
-                  </svg>
-                  받기
-                </button>
-              ) : (
-                <span className="shrink-0 rounded-lg bg-surface-2 px-3.5 py-2 text-sm font-bold text-ink-muted">
-                  준비 중
-                </span>
-              )}
-            </Card>
-          ))}
+                {r.ready && url ? (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border-strong px-3.5 py-2 text-sm font-bold text-ink transition-colors hover:bg-surface-2"
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                    </svg>
+                    원문 보기
+                  </a>
+                ) : (
+                  <span className="shrink-0 rounded-lg bg-surface-2 px-3.5 py-2 text-sm font-bold text-ink-muted">
+                    준비 중
+                  </span>
+                )}
+              </Card>
+            );
+          })}
         </div>
       </Section>
 
@@ -68,7 +75,7 @@ export default function ResourcesPage() {
           </Callout>
         </div>
         <p className="mt-4 text-xs text-ink-muted">
-          ※ 현재 버튼은 데모용입니다. {DATA_NOTE}
+          ※ 시의회 결의안은 고양시의회 원문으로 연결됩니다. 나머지 데이터는 확보 후 순차 공개합니다. {DATA_NOTE}
         </p>
       </Section>
     </>
