@@ -122,7 +122,7 @@ export const FEATURES = [
   {
     title: "교통 소외지수",
     body: "철도 접근성·배차·통행시간을 합산해 지역별 이동권 격차를 하나의 지수로. (자료 확보 중)",
-    href: "/analysis#transit-poverty",
+    href: "/transit#transit-poverty",
   },
   {
     title: "실시간 정책 타임라인",
@@ -132,7 +132,7 @@ export const FEATURES = [
   {
     title: "출퇴근 시뮬레이터",
     body: "현재 경로와 연장 후 예상 경로의 통행시간을 비교합니다.",
-    href: "/analysis#simulator",
+    href: "/transit#simulator",
   },
   {
     title: "버스 혼잡도 시각화",

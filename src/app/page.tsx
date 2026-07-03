@@ -42,7 +42,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/petition">서명 참여하기 →</ButtonLink>
-              <ButtonLink href="/analysis" variant="ghost">
+              <ButtonLink href="/transit" variant="ghost">
                 데이터 근거 보기
               </ButtonLink>
             </div>
@@ -132,7 +132,7 @@ export default function HomePage() {
             </div>
             <SourceTag source={POP_SOURCE.source} date={POP_SOURCE.asOf} />
             <Link
-              href="/analysis"
+              href="/transit#population"
               className="mt-3 inline-block text-sm font-bold text-brand hover:underline"
             >
               인구·분석 자세히 →

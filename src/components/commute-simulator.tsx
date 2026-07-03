@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SIMULATOR, SIMULATOR_NOTE } from "@/data/analysis";
+import { SIMULATOR, SIMULATOR_NOTE } from "@/data/transit";
 
 export function CommuteSimulator() {
   const [idx, setIdx] = useState(0);
