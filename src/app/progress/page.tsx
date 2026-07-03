@@ -78,13 +78,28 @@ export default function ProgressPage() {
               </thead>
               <tbody>
                 {PROMISES.map((p) => (
-                  <tr key={p.what} className="border-b border-border last:border-0">
+                  <tr key={p.who + p.what} className="border-b border-border last:border-0 align-top">
                     <td className="px-5 py-4 font-semibold text-ink">{p.who}</td>
                     <td className="px-5 py-4 text-ink-soft">{p.what}</td>
                     <td className="px-5 py-4">
                       <StageBadge stage={p.status} />
                     </td>
-                    <td className="px-5 py-4 text-ink-muted">{p.note}</td>
+                    <td className="px-5 py-4 text-ink-muted">
+                      {p.note}
+                      {p.source && (
+                        <>
+                          {" "}
+                          <a
+                            href={p.source.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="whitespace-nowrap font-semibold text-brand hover:underline"
+                          >
+                            [{p.source.label}]
+                          </a>
+                        </>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

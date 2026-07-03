@@ -14,6 +14,8 @@ export const STAGES: { name: string; stage: Stage; desc: string }[] = [
 
 /** 정책 타임라인 (실제 보도 기반) */
 export const TIMELINE = [
+  { date: "2026-06", tag: "선거", title: "민선9기 출범 · 신임 시장도 식사 연장 공약", body: "6·3 지방선거에서 민경선 고양시장 당선(2026.7 취임). 여·야 후보 모두 고양은평선 식사·일산 연장을 공약해 초당적 과제임이 재확인됨." },
+  { date: "2026-03", tag: "의회", title: "고양시의회, 식사동 철도 사각지대 시정질문", body: "고덕희 의원(식사·풍산·고봉) 제302회 임시회 시정질문에서 '준신도시급 식사동에 지하철역이 하나도 없다'며 조기 추진 촉구." },
   { date: "2026-01", tag: "행정", title: "트램보다 '고양은평선 일산연장' 우선 검토", body: "고양시, 광역철도(고양은평선 연장)를 우선 검토 방침으로 정리. (경기일보 보도)" },
   { date: "2025-11", tag: "주민", title: "2025 서명운동 마감 · 시장에 서명부 전달", body: "7.25~11.14 서명운동 누적 약 22,000명. 이동환 고양특례시장에게 주민 서명부 전달." },
   { date: "2025-09", tag: "의회", title: "고양시의회, 일산(식사) 연장 촉구 결의안 만장일치", body: "9월 15일 제297회 정례회 본회의에서 결의안 의결. 식사역까지 2.04km·사업비 2,361억원 연장을 정부에 촉구." },
@@ -22,12 +24,58 @@ export const TIMELINE = [
   { date: "2024-12", tag: "본선", title: "고양은평선 기본계획 승인", body: "국토부 대광위, 새절~고양시청 본선 기본계획 승인. 2031년 개통 목표." },
 ];
 
-/** 공약·행정 추적기 (실제, 중립 기록) */
-export const PROMISES = [
-  { who: "이동환 고양특례시장", what: "제5차 광역교통계획에 고양은평선 연장 반영", status: "진행" as Stage, note: "반영 총력 방침" },
-  { who: "고양시의회", what: "고양은평선 일산(식사) 연장 촉구 결의", status: "완료" as Stage, note: "2025.09.15 본회의 만장일치" },
-  { who: "경기도의회(오준환 도의원 등)", what: "식사동 연장 필요성 제기", status: "진행" as Stage, note: "도정 차원 논의" },
-  { who: "고양시(행정)", what: "사전타당성 검토 용역 추진", status: "진행" as Stage, note: "2026 추경 신청" },
+/**
+ * 공약·행정 추적기 (실제, 중립 기록)
+ * 특정 정당·후보를 지지·반대하지 않으며, 공개된 계획·발언·의결만을 사실로 기록합니다.
+ * source: 검증 가능한 원문 보도 링크(있는 항목만).
+ */
+export const PROMISES: {
+  who: string;
+  what: string;
+  status: Stage;
+  note: string;
+  source?: { label: string; url: string };
+}[] = [
+  {
+    who: "민경선 고양특례시장",
+    what: "고양은평선 식사·일산 연장 추진 · 제5차 광역교통시행계획 반영",
+    status: "진행",
+    note: "2026 지방선거 공약(2026.5.25 식사동 위시티 토론회) · 2026.7 취임, 이행 과제",
+    source: { label: "뉴스선데이", url: "https://www.newssunday.co.kr/news/view.php?no=249493" },
+  },
+  {
+    who: "고양시의회",
+    what: "고양은평선 일산(식사) 연장 촉구 결의",
+    status: "완료",
+    note: "2025.09.15 제297회 본회의 만장일치",
+    source: { label: "고양신문", url: "https://www.mygoyang.com/news/articleView.html?idxno=85684" },
+  },
+  {
+    who: "경기도의회(오준환 도의원)",
+    what: "식사동 연장 필요성 제기 · '미래 성장축'",
+    status: "진행",
+    note: "제386회 임시회 5분 자유발언",
+  },
+  {
+    who: "고덕희 고양시의원(식사·풍산·고봉)",
+    what: "식사동 철도 사각지대 해소 · 조기 추진 촉구",
+    status: "진행",
+    note: "2026.3.6 제302회 임시회 시정질문",
+    source: { label: "고양신문", url: "https://www.mygoyang.com/news/articleView.html?idxno=87878" },
+  },
+  {
+    who: "고양시(행정)",
+    what: "사전타당성 검토 용역 추진",
+    status: "진행",
+    note: "2026 추경 신청",
+  },
+  {
+    who: "이동환 前 고양특례시장",
+    what: "제5차 광역교통시행계획 반영 국토부·대광위 건의",
+    status: "완료",
+    note: "민선8기 행정 · 2024.11 반영 건의, 2026.3 현장점검 · 2026.6 임기 종료",
+    source: { label: "노컷뉴스", url: "https://www.nocutnews.co.kr/news/6432085" },
+  },
 ];
 
 /** 서명 현황 (실제) */
@@ -40,6 +88,7 @@ export const PETITION = {
 
 /** 뉴스 (실제 보도) */
 export const NEWS = [
+  { date: "2026-06-04", source: "경기일보", title: "민주당 민경선, 고양시장 당선…'107만 고양시민 모두의 시장'", url: "https://www.kyeonggi.com/article/20260604580267" },
   { date: "2026-01-28", source: "경기일보", title: "고양시 트램보다 '고양은평선 일산연장'…광역철도 우선 검토", url: "https://www.kyeonggi.com/article/20260128580279" },
   { date: "2025-11-21", source: "딜라이브뉴스", title: "'고양은평선 일산 연장' 서명 확대…주민 2만2000여명 동참", url: "https://news.dlive.kr/news/articleView.html?idxno=19484" },
   { date: "2025-09-15", source: "고양신문", title: "'고양은평선 일산(식사) 연장 촉구 결의안' 만장일치 통과", url: "https://www.mygoyang.com/news/articleView.html?idxno=85684" },
